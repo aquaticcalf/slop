@@ -1,0 +1,13 @@
+.{
+    .name = .slop,
+    .version = "0.0.0",
+    .fingerprint = 0xab63e47e24c4d440,
+    .minimum_zig_version = "0.17.0-dev.1158+1d1193aa7",
+    .dependencies = .{},
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "cmd",
+        "pkg",
+    },
+}
