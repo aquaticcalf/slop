@@ -9,12 +9,18 @@ pub fn build(b: *std.Build) void {
         .target = target,
     });
 
+    const jax_mod = b.addModule("jax", .{
+        .root_source_file = b.path("pkg/jax/main.zig"),
+        .target = target,
+    });
+
     const exe_mod = b.createModule(.{
         .root_source_file = b.path("cmd/slop/main.zig"),
         .target = target,
         .optimize = optimize,
         .imports = &.{
             .{ .name = "slop", .module = lib_mod },
+            .{ .name = "jax", .module = jax_mod },
         },
     });
 
@@ -36,6 +42,7 @@ pub fn build(b: *std.Build) void {
         .target = target,
         .imports = &.{
             .{ .name = "slop", .module = lib_mod },
+            .{ .name = "jax", .module = jax_mod },
         },
     });
 
@@ -44,6 +51,7 @@ pub fn build(b: *std.Build) void {
         .target = target,
         .imports = &.{
             .{ .name = "slop", .module = lib_mod },
+            .{ .name = "jax", .module = jax_mod },
         },
     });
 
