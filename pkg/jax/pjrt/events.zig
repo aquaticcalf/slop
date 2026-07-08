@@ -35,7 +35,7 @@ pub const EventOnReadyArgs = extern struct {
     struct_size: usize,
     extension_start: ?*ExtensionBase,
     event: ?*Event,
-    callback: *const fn (?*Error, ?*anyopaque) callconv(.C) void,
+    callback: *const fn (?*Error, ?*anyopaque) callconv(.c) void,
     user_arg: ?*anyopaque,
 };
 

@@ -22,7 +22,6 @@ pub const TopologyDescription = handles.TopologyDescription;
 pub const ExecuteOptions = handles.ExecuteOptions;
 pub const ExecuteContext = handles.ExecuteContext;
 pub const SerializedExecutable = handles.SerializedExecutable;
-pub const SerializedCompileOptions = handles.SerializedCompileOptions;
 pub const AsyncHostToDeviceTransferManager = handles.AsyncHostToDeviceTransferManager;
 pub const AsyncTrackingEvent = handles.AsyncTrackingEvent;
 pub const FulfillAliasBufferCallback = handles.FulfillAliasBufferCallback;
@@ -125,7 +124,7 @@ pub const SerializedCompileOptions = extern struct {
 pub const Chunk = extern struct {
     data: ?*anyopaque,
     size: usize,
-    deleter: ?*const fn (?*anyopaque, ?*anyopaque) callconv(.C) void,
+    deleter: ?*const fn (?*anyopaque, ?*anyopaque) callconv(.c) void,
     deleter_arg: ?*anyopaque,
 };
 
@@ -134,7 +133,7 @@ pub const LogicalDeviceIds = extern struct {
     partition: c_int,
 };
 
-pub const ErrorPayloadVisitor = *const fn (key: [*:0]const u8, key_size: usize, value: [*:0]const u8, value_size: usize, user_arg: ?*anyopaque) callconv(.C) void;
+pub const ErrorPayloadVisitor = *const fn (key: [*:0]const u8, key_size: usize, value: [*:0]const u8, value_size: usize, user_arg: ?*anyopaque) callconv(.c) void;
 
 pub const CopyRawToHostFutureCallbackArgs = extern struct {
     struct_size: usize,

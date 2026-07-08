@@ -45,7 +45,7 @@ pub const CopyRawToHostFutureArgs = extern struct {
     extension_start: ?*ExtensionBase,
     buffer: ?*Buffer,
     dst: ?*anyopaque,
-    callback: ?*const fn (?*CopyRawToHostFutureCallbackArgs) callconv(.C) void,
+    callback: ?*const fn (?*CopyRawToHostFutureCallbackArgs) callconv(.c) void,
     callback_data: ?*anyopaque,
 };
 
@@ -53,7 +53,7 @@ pub const DonateWithControlDependencyArgs = extern struct {
     struct_size: usize,
     extension_start: ?*ExtensionBase,
     buffer: ?*Buffer,
-    callback: ?*const fn (?*DonateWithControlDependencyCallbackArgs) callconv(.C) void,
+    callback: ?*const fn (?*DonateWithControlDependencyCallbackArgs) callconv(.c) void,
     callback_data: ?*anyopaque,
 };
 

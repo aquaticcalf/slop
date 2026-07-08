@@ -69,7 +69,7 @@ pub const SerializeArgs = extern struct {
     serialized_bytes: [*:0]const u8,
     serialized_bytes_size: usize,
     serialized_executable: ?*SerializedExecutable,
-    serialized_executable_deleter: ?*const fn (?*SerializedExecutable) callconv(.C) void,
+    serialized_executable_deleter: ?*const fn (?*SerializedExecutable) callconv(.c) void,
 };
 
 pub const DeserializeAndLoadArgs = extern struct {

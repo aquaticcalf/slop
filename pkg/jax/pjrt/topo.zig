@@ -55,7 +55,7 @@ pub const SerializeArgs = extern struct {
     serialized_bytes: [*:0]const u8,
     serialized_bytes_size: usize,
     serialized_topology: ?*SerializedTopology,
-    serialized_topology_deleter: ?*const fn (?*SerializedTopology) callconv(.C) void,
+    serialized_topology_deleter: ?*const fn (?*SerializedTopology) callconv(.c) void,
 };
 
 pub const DeserializeArgs = extern struct {
@@ -92,7 +92,7 @@ pub const MakeCanonicalShapeForMemorySpaceArgs = extern struct {
     layout: ?*const BufferMemoryLayout,
     serialized_shape: [*:0]const u8,
     serialized_shape_size: usize,
-    serialized_shape_deleter: ?*const fn ([*:0]const u8) callconv(.C) void,
+    serialized_shape_deleter: ?*const fn ([*:0]const u8) callconv(.c) void,
 };
 
 pub const GetMemorySpaceKindIdsArgs = extern struct {
