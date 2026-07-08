@@ -25,7 +25,7 @@ pub fn build(b: *std.Build) void {
     const mock_plugin = b.addLibrary(.{
         .name = "mock_pjrt",
         .root_module = b.createModule(.{
-            .root_source_file = b.path("pkg/jax/runtime/test/mock_plugin.zig"),
+            .root_source_file = b.path("pkg/jax/runtime/test/mock.zig"),
             .target = target,
             .optimize = optimize,
             .imports = &.{
