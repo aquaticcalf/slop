@@ -1,0 +1,5 @@
+package slop
+
+add :: proc(a, b: i32) -> i32 {
+	return a + b
+}
