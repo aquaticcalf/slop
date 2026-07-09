@@ -12,13 +12,15 @@ else
   RM    := rm -rf $(OUT_DIR)
 endif
 
-ODIN_ROOT := $(shell $(ODIN) root)
-ODINFMT   := $(ODIN_ROOT)/ols/tools/odinfmt/odinfmt$(EXE)
+ODIN_ROOT  := $(shell $(ODIN) root)
+OLS_DIR    := $(ODIN_ROOT)/ols
+ODINFMT_SRC := $(OLS_DIR)/tools/odinfmt/main.odin
+ODINFMT    := $(OLS_DIR)/tools/odinfmt/odinfmt$(EXE)
 
 COLLECTIONS := -collection:pkg=pkg
 FLAGS       := $(COLLECTIONS)
 
-.PHONY: all build run test check fmt clean dirs help
+.PHONY: all build run test check fmt clean dirs help setup
 
 all: help
 
@@ -31,7 +33,18 @@ build: dirs
 run: build
 	$(OUT_DIR)/$(EXE_NAME)$(EXE)
 
-fmt:
+setup: $(ODINFMT)
+
+$(ODINFMT): $(ODINFMT_SRC)
+	cd $(OLS_DIR)/tools/odinfmt && $(ODIN) build main.odin -file -collection:src=../../src -out:odinfmt$(EXE)
+
+$(ODINFMT_SRC): $(OLS_DIR)
+	@true
+
+$(OLS_DIR):
+	cd $(ODIN_ROOT) && git clone https://github.com/DanielGavin/ols.git
+
+fmt: $(ODINFMT)
 	$(ODINFMT) -w -path:pkg/
 	$(ODINFMT) -w -path:cmd/
 
@@ -52,6 +65,7 @@ help:
 	@echo   make / make help   - show this help
 	@echo   make build         - build bin/$(EXE_NAME)$(EXE)
 	@echo   make run           - build and run
+	@echo   make setup         - build odinfmt (auto if missing)
 	@echo   make fmt           - format all .odin files
 	@echo   make check         - typecheck packages
 	@echo   make test          - run tests
