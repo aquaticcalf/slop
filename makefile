@@ -12,10 +12,13 @@ else
   RM    := rm -rf $(OUT_DIR)
 endif
 
+ODIN_ROOT := $(shell $(ODIN) root)
+ODINFMT   := $(ODIN_ROOT)/ols/tools/odinfmt/odinfmt$(EXE)
+
 COLLECTIONS := -collection:pkg=pkg
 FLAGS       := $(COLLECTIONS)
 
-.PHONY: all build run test check clean dirs help
+.PHONY: all build run test check fmt clean dirs help
 
 all: help
 
@@ -27,6 +30,10 @@ build: dirs
 
 run: build
 	$(OUT_DIR)/$(EXE_NAME)$(EXE)
+
+fmt:
+	$(ODINFMT) -w -path:pkg/
+	$(ODINFMT) -w -path:cmd/
 
 check:
 	$(ODIN) check pkg/slop -no-entry-point $(FLAGS)
@@ -45,6 +52,7 @@ help:
 	@echo   make / make help   - show this help
 	@echo   make build         - build bin/$(EXE_NAME)$(EXE)
 	@echo   make run           - build and run
+	@echo   make fmt           - format all .odin files
 	@echo   make check         - typecheck packages
 	@echo   make test          - run tests
 	@echo   make clean         - remove $(OUT_DIR)/
